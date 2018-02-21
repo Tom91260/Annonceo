@@ -124,7 +124,7 @@ ob_start();
             <div class="btn btn-default btn-lg">
                 <span>photo5</span>
                 <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
-            </div>
+            </div> 
         </label>
         <input type="file" class="typeFile" name="photo5" id="photo5">
     </div>

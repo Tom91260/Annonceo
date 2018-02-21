@@ -1,11 +1,40 @@
 <?php
     require_once('inc/init.php');
 
-    ob_start();
+	if(isset($_GET['id_annonce'])){
+		//je recoi bien le parametre dans l'url
+		$sql = "SELECT *, c.titre as titrec, a.titre as titrea FROM annonce a, categorie c, membre m WHERE m.id_membre=a.membre_id
+		AND c.id_categorie=a.categorie_id AND id_annonce = :id_annonce";
+		$resul = executeRequete($sql,array('id_annonce' => $_GET['id_annonce'] ));
+
+		$annonce = $resul->fetch(PDO::FETCH_ASSOC);
+		ob_start();
+		?>
+		<div id="principal" class="ligne">
+				<main>  
+				 <button type="submit" class="btn btn-primary">Contacter <?= $annonce['prenom'] ?></button>
+				
+					<img src="<?= $annonce['photo'] ?>" alt="<?= $annonce['titrea'] ?>" title="<?= $annonce['titrea'] ?>">
+					
+					<h2><?= $annonce['titrea'] ?></h2>
+					<p><?= $annonce['description_longue'] ?></p>    
+
+			
+				</main>
+
+    </div id="container">
+
+<?php
+	$content = ob_get_clean();
+
+	}
+	else{
+		//sinon afficher un message d'erreur
+	}
+
+	
 ?>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
+<!-- <nav class="navbar navbar-default">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -16,7 +45,6 @@
       <a class="navbar-annonceo" href="#">Annonceo</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#"> Qui sommes-nous ?<span class="sr-only">(current)</span></a></li>
@@ -33,8 +61,8 @@
   
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
 <body>
     <div id="container">
@@ -47,51 +75,10 @@
 					
 				</div>
 			</header>
-			<div id="principal" class="ligne">
-
-            </header>
-			<div id="principal" class="ligne">
-				<main>
-					<h2></h2>
-					<p>
-					<br/>
-					<br/>
-					
-					</p>
-					<img src="inventeur_bitcoin_démasqué.jpg" alt="photo" title="photo">
-					
-				
-					<h3>Description</h3>
-					<ol>
-						<li>
-						
-						</li>
-						</br>
-						<li>
-						
-						</li>
-						</br>
-						<li>
-						
-						</li>
-						</br>
-						<li>
-						
-						</li>
-						</br>
-						<li>
-						
-						</li>
-						</br>
-						<li>
-						
-						</li>
-					</ol>
-				</main>
-    </div id="container">
-</body>
+	
+			
+</body> -->
 <?php
-    $content= ob_get_clean();
     include('inc/gabarit.php');
 
 ?>
